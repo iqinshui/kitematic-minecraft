@@ -1,12 +1,28 @@
+# Minecraft 1.8.7 Dockerfile - Example with notes
+
+# Use the offical Debian Docker image with a specified version tag, Wheezy, so not all
+# versions of Debian images are downloaded.
 FROM debian:wheezy
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get -y upgrade && apt-get install -y apt-utils wget vim
-RUN apt-get install -y openjdk-7-jre
-RUN mkdir /etc/minecraft && \
-    cd /etc/minecraft && \
-    wget http://7xk2f8.media1.z0.glb.clouddn.com/minecraft_server.1.7.10.jar && \
-    touch eula.txt && \
-    echo "eula=true" > eula.txt 
-WORKDIR /etc/minecraft
+
+MAINTAINER Michael Chiang <mchiang@docker.com>
+
+# Use APT (Advanced Packaging Tool) built in the Linux distro to download Java, a dependency
+# to run Minecraft.
+RUN apt-get -y update
+RUN apt-get -y install openjdk-7-jre-headless wget
+
+# Download Minecraft Server components
+RUN wget -q https://s3.amazonaws.com/Minecraft.Download/versions/1.7.10/minecraft_server.1.7.10.jar
+# Download Minecraft Server Config
+RUN wget -q http://7xk2f8.media1.z0.glb.clouddn.com/server.properties
+# Sets working directory for the CMD instruction (also works for RUN, ENTRYPOINT commands)
+# Create mount point, and mark it as holding externally mounted volume
+WORKDIR /data
+VOLUME /data
+
+# Expose the container's network port: 25565 during runtime.
 EXPOSE 25565
-CMD ["java","-jar","minecraft_server.1.7.10.jar","nogui"]
+# copy 
+CMD cp -f server.properties /data/server.properties
+#Automatically accept Minecraft EULA, and start Minecraft server
+CMD echo eula=true > /data/eula.txt && java -Xmx512M -Xms768M -jar minecraft_server.1.7.10.jar nogui
