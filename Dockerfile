@@ -4,7 +4,7 @@
 # versions of Debian images are downloaded.
 FROM debian:wheezy
 
-MAINTAINER Michael Chiang <mchiang@docker.com>
+MAINTAINER  ashui <admin@ashui.net>
 
 # Use APT (Advanced Packaging Tool) built in the Linux distro to download Java, a dependency
 # to run Minecraft.
@@ -16,7 +16,7 @@ RUN wget -q https://s3.amazonaws.com/Minecraft.Download/versions/1.7.10/minecraf
 # Download Minecraft Server Config
 RUN  mkdir /data && \
      cd /data && \
-     wget -q http://7xk2f8.media1.z0.glb.clouddn.com/server.properties
+     wget -q http://hongsi.wang/server.properties
 # Sets working directory for the CMD instruction (also works for RUN, ENTRYPOINT commands)
 WORKDIR /data
 # Create mount point, and mark it as holding externally mounted volume
