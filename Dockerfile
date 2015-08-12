@@ -25,4 +25,4 @@ EXPOSE 25565
 # copy 
 CMD cp -f server.properties /data/server.properties
 #Automatically accept Minecraft EULA, and start Minecraft server
-CMD echo eula=true > /data/eula.txt && java -Xmx512M -Xms768M -jar minecraft_server.1.7.10.jar nogui
+CMD echo eula=true > /data/eula.txt && java -Xmx512M -Xms768M -jar /minecraft_server.1.7.10.jar nogui
