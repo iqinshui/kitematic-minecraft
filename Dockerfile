@@ -14,15 +14,13 @@ RUN apt-get -y install openjdk-7-jre-headless wget
 # Download Minecraft Server components
 RUN wget -q https://s3.amazonaws.com/Minecraft.Download/versions/1.7.10/minecraft_server.1.7.10.jar
 # Download Minecraft Server Config
-RUN wget -q http://7xk2f8.media1.z0.glb.clouddn.com/server.properties
-
+RUN  mkdir /data && \
+     cd /data && \
+     wget -q http://7xk2f8.media1.z0.glb.clouddn.com/server.properties
 # Sets working directory for the CMD instruction (also works for RUN, ENTRYPOINT commands)
-# Create mount point, and mark it as holding externally mounted volume
 WORKDIR /data
-# copy 
-RUN cp /server.properties /data/server.properties
+# Create mount point, and mark it as holding externally mounted volume
 VOLUME /data
-
 # Expose the container's network port: 25565 during runtime.
 EXPOSE 25565
 
