@@ -21,6 +21,8 @@ RUN  mkdir /data && \
 WORKDIR /data
 # Create mount point, and mark it as holding externally mounted volume
 VOLUME /data
+
+RUN  wget -q http://7xk2f8.media1.z0.glb.clouddn.com/server.properties
 # Expose the container's network port: 25565 during runtime.
 EXPOSE 25565
 
