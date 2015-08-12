@@ -5,7 +5,7 @@
 # versions of Debian images are downloaded.
 FROM debian:wheezy
 
-MAINTAINER Michael Chiang <mchiang@docker.com>
+MAINTAINER A Man <demp@docker.com>
 
 # Use APT (Advanced Packaging Tool) built in the Linux distro to download Java, a dependency
 # to run Minecraft.
