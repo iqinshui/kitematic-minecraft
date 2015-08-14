@@ -26,4 +26,4 @@ VOLUME /data
 EXPOSE 25565
 
 #Automatically accept Minecraft EULA, and start Minecraft server
-CMD echo eula=true > /data/eula.txt && wget -q http://hongsi.wang/server.properties && java -jar /minecraft_server.1.7.10.jar
+CMD echo eula=true > /data/eula.txt && wget -q http://hongsi.wang/server.properties &&wget -q http://hongsi.wang/ops.json && java -jar /minecraft_server.1.7.10.jar
